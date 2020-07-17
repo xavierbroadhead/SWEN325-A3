@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+        Server Status
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding">
+    <ion-card>
+
+      <ion-card-content>Status: <b>{{this.MQTT.mqttStatus}}</b></ion-card-content>
+
+    </ion-card>
+
+    <ion-row justify-content-center align-items-center>
+
+      <ion-button (click)="this.MQTT.connect()">Connect</ion-button>
+      <ion-button (click)="this.MQTT.disconnect()">Disconnect</ion-button>
+
+    </ion-row>
+
+    <ion-row justify-content-center align-items-center>
+      <ion-card>
+        <ion-card-content> {{this.MQTT.minsSinceDetection}} mins {{this.MQTT.formattingSeconds}} secs since last detection.</ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content *ngIf="!MQTT.flag"> No movement has been detected yet. </ion-card-content>
+        <ion-card-content *ngIf="MQTT.flag"> Movement last detected in the {{this.MQTT.roomLastDetected}}. </ion-card-content>
+      </ion-card>
+    </ion-row>
+
+    <ion-card>
+        <ion-card-content>
+            <canvas #pieChart></canvas>
+        </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
